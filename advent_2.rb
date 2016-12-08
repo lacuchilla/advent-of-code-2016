@@ -5,7 +5,7 @@ class Keypad
     @keys = keys
     @row_position = 1
     @column_position = 1
-    @current_key = @keypad[@row_position][@column_position]
+    @current_key = set_current_key
     @code = ""
   end
 
@@ -17,30 +17,31 @@ class Keypad
             if @row_position < 0
               @row_position = 0
             end
-            @current_key = @keypad[@row_position][@column_position]
         elsif key == "L"
           @column_position -= 1
           if @column_position < 0
             @column_position = 0
           end
-          @current_key = @keypad[@row_position][@column_position]
         elsif key == "R"
           @column_position += 1
           if @column_position > 2
             @column_position = 2
           end
-          @current_key = @keypad[@row_position][@column_position]
         elsif key == "D"
           @row_position += 1
           if @row_position > 2
             @row_position = 2
           end
-          @current_key = @keypad[@row_position][@column_position]
         end
+        set_current_key
       end
       @code << @current_key.to_s
     end
     puts @code
+  end
+
+  def set_current_key
+    @current_key = @keypad[@row_position][@column_position]
   end
 end
 
